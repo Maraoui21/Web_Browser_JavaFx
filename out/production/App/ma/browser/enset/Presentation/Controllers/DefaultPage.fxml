@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.web.WebView?>
+<Tab fx:id="currentTab" styleClass="tabs" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ma.browser.enset.Presentation.Controllers.DefaultTab">
+    <BorderPane >
+        <top>
+            <HBox fx:id="HoriZontalBox1" alignment="CENTER_LEFT" spacing="5">
+                    <HBox alignment="CENTER_LEFT" spacing="8">
+                        <ProgressBar fx:id="Loading" minHeight="10" prefHeight="2.0" progress="0.0" />
+                        <Button styleClass="btn" layoutX="3.0" layoutY="18.0" mnemonicParsing="false" onAction="#back1" prefHeight="28.0"
+                                prefWidth="26.0" text="&lt;"/>
+                        <Button styleClass="btn" layoutX="36.0" layoutY="18.0" mnemonicParsing="false" onAction="#forward1" prefHeight="26.0"
+                                prefWidth="26.0" style="-fx-border-color: #0000;" text="&gt;"/>
+                        <Button styleClass="btn" layoutX="73.0" layoutY="19.0" mnemonicParsing="false" onAction="#refresh1" prefHeight="26.0"
+                                prefWidth="58.0" text="Refresh"/>
+                        <TextField fx:id="tfTitle1" layoutX="139.0" layoutY="18.0" prefHeight="26.0" prefWidth="718.0" promptText="Type keyword or URL"/>
+                        <Button styleClass="btn" layoutX="811.0" layoutY="18.0" mnemonicParsing="false" onAction="#visite1" text="Go"/>
+                    </HBox>
+                    <HBox spacing="5">
+                        <Button styleClass="btn" text="History"/>
+                        <Button styleClass="btn" text="DownLoad"/>
+                    </HBox>
+            </HBox>
+        </top>
+        <center>
+            <WebView fx:id="webViewF1" layoutX="-1.0" layoutY="52.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="496.0" prefWidth="862.0" />
+        </center>
+    </BorderPane>
+</Tab>

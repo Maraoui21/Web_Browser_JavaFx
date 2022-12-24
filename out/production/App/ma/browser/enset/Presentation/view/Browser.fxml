@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.web.WebView?>
+
+<TabPane fx:id="tabPan" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="574.0" prefWidth="862.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ma.browser.enset.Presentation.Controllers.BrowserController">
+    <tabs>
+        <Tab styleClass="tabs"  fx:id="firstTab" text="New tab">
+            <content>
+                <BorderPane>
+                    <top>
+                        <HBox fx:id="HoriZontalBox" alignment="CENTER_LEFT" spacing="5">
+                            <HBox alignment="CENTER_LEFT" spacing="8">
+                                <children>
+                                    <ProgressBar fx:id="Loading" minHeight="9" prefHeight="2.0" progress="0.0" />
+                                    <Button styleClass="btn" fx:id="back" layoutX="3.0" layoutY="18.0" mnemonicParsing="false" onAction="#back" prefHeight="28.0" prefWidth="26.0" text="&lt;" />
+                                    <Button styleClass="btn"  fx:id="forward" layoutX="36.0" layoutY="18.0" mnemonicParsing="false" onAction="#forward" prefHeight="26.0" prefWidth="26.0" style="-fx-border-color: #0000;" text="&gt;" />
+                                    <Button styleClass="btn" fx:id="refresh" layoutX="73.0" layoutY="19.0" mnemonicParsing="false" onAction="#refresh" prefHeight="26.0" prefWidth="58.0" text="Refresh" />
+                                    <TextField fx:id="tfTitle" layoutX="139.0" layoutY="18.0" prefHeight="26.0" prefWidth="718.0" promptText="Type keyword or URL" />
+                                    <Button styleClass="btn" layoutX="811.0" layoutY="18.0" mnemonicParsing="false" onAction="#visite" text="Go" />
+                                </children>
+                            </HBox>
+                            <HBox alignment="CENTER" spacing="5">
+                                <Button styleClass="btn" text="History"/>
+                                <Button styleClass="btn" text="DownLoad"/>
+                            </HBox>
+                        </HBox>
+                    </top>
+                    <center>
+                        <WebView fx:id="webViewF" layoutX="-1.0" layoutY="52.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="862.0" />
+                    </center>
+                </BorderPane>
+            </content>
+        </Tab>
+        <Tab styleClass="tabs"  fx:id="addNewTab" text="+">
+        </Tab>
+    </tabs>
+</TabPane>
