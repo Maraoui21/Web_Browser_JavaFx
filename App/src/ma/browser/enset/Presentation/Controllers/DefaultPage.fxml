@@ -23,6 +23,7 @@
                     <HBox spacing="5">
                         <Button styleClass="btn" text="History"/>
                         <Button styleClass="btn" text="DownLoad"/>
+                        <Button styleClass="btn" text="Login"/>
                     </HBox>
             </HBox>
         </top>

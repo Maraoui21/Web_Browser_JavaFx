@@ -8,8 +8,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import ma.browser.enset.Dao.Entities.History;
+import ma.browser.enset.Dao.Entities.User;
 import ma.browser.enset.Dao.SingletoConnexionDb;
 import ma.browser.enset.Presentation.Controllers.BrowserController;
+
+import java.sql.Connection;
+import java.util.ArrayList;
+
 
 public class Main extends Application{
     public static void main(String[] args) {
@@ -18,10 +24,16 @@ public class Main extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        SingletoConnexionDb single;
+        User maraoui = new User();
+        maraoui.setEmail("yassinelmaraoui76@gmail.com");
+        maraoui.setPassword("123");
+        History h = new History();
+        h.setUrl("www.facebook.com");
+        h.setDate("20/1/2022");
+        h.setUserID(1);
+
 
         TabPane root = FXMLLoader.load(getClass().getResource("view/Browser.fxml"));
-
         // access controller functions
         FXMLLoader fxmlLoader = new FXMLLoader();
         TabPane p = fxmlLoader.load(getClass().getResource("view/Browser.fxml").openStream());

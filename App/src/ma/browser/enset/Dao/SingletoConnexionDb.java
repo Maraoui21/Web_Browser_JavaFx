@@ -12,13 +12,14 @@ public class SingletoConnexionDb {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection(url, user, pass);
+            System.out.println("OK !");
         }
         catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public Connection getConnection() {
+    public static Connection getConnection() {
         return con;
     }
 }
