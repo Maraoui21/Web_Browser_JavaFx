@@ -40,4 +40,10 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        User user = (User) obj;
+        return (user.email.equals(this.email) && user.password.equals(this.password));
+    }
 }

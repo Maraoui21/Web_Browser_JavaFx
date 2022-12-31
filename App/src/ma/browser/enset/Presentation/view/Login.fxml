@@ -6,9 +6,30 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="ma.browser.enset.Presentation.Controllers.Login"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<Tab fx:id="LoginTab" styleClass="tabs" xmlns="http://javafx.com/javafx"
+     xmlns:fx="http://javafx.com/fxml"
+     fx:controller="ma.browser.enset.Presentation.Controllers.Login"
+            >
+    <content>
+        <BorderPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="BorderPanStyle">
+            <center>
+                <VBox  alignment="CENTER" maxHeight="450.0" maxWidth="500.0" prefHeight="200.0" prefWidth="862.0" spacing="20" styleClass="LoginVbox">
+                    <children>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@Images/user.png" />
+                            </image>
+                        </ImageView>
+                        <Label styleClass="LoginLabels" prefHeight="18.0" prefWidth="294.0" text="EMail" />
+                        <TextField fx:id="emailField" promptText="Votre email" layoutX="282.0" layoutY="203.0" maxWidth="300.0" prefHeight="30.0" prefWidth="273.0" />
+                        <Label  styleClass="LoginLabels" prefHeight="18.0" prefWidth="299.0"/>
+                        <PasswordField fx:id="passwordField" promptText="Votre Mots de passe" layoutX="282.0" layoutY="260.0" maxWidth="300.0" prefHeight="30.0" prefWidth="300.0" />
+                        <Button onAction="#Login" alignment="CENTER" layoutX="485.0" layoutY="312.0" mnemonicParsing="false" prefHeight="30" prefWidth="68.0" styleClass="LoginBtn" text="Login" />
+                    </children>
+                </VBox>
+            </center>
+        </BorderPane>
+    </content>
+</Tab>

@@ -14,22 +14,25 @@ import java.util.ArrayList;
 public class HistoryDaoImpl implements HistoryDao {
 
     // DAO METHODS
-
-
-    public ArrayList<History> findAll(User user) throws SQLException {
-        Connection con = SingletoConnexionDb.getConnection();
-        PreparedStatement query = con.prepareStatement("SELECT * from HISTORY where user = ?");
-        query.setInt(1,user.getId());
-        ResultSet QueryResult = query.executeQuery();
-        ArrayList<History> HistoryList = new ArrayList<>();
-        while (QueryResult.next()){
-            History toAdd = new History();
-            toAdd.setUrl(QueryResult.getString("url"));
-            toAdd.setDate(QueryResult.getString("date"));
-            toAdd.setUserID(QueryResult.getInt("user"));
-            HistoryList.add(toAdd);
+    public ArrayList<History> findAll(User user)  {
+        try {
+            Connection con = SingletoConnexionDb.getConnection();
+            PreparedStatement query = con.prepareStatement("SELECT * from HISTORY where user = ?");
+            query.setInt(1,user.getId());
+            ResultSet QueryResult = query.executeQuery();
+            ArrayList<History> HistoryList = new ArrayList<>();
+            while (QueryResult.next()){
+                History toAdd = new History();
+                toAdd.setUrl(QueryResult.getString("url"));
+                toAdd.setDate(QueryResult.getString("date"));
+                toAdd.setUserID(QueryResult.getInt("user"));
+                HistoryList.add(toAdd);
+            }
+            return HistoryList;
+        }catch (SQLException e){
+            e.getStackTrace();
         }
-        return HistoryList;
+        return null;
     }
 
     @Override
@@ -38,21 +41,20 @@ public class HistoryDaoImpl implements HistoryDao {
     }
 
     @Override
-    public History insert(History o) throws SQLException{
-        Connection con = SingletoConnexionDb.getConnection();
-        PreparedStatement Query = con.prepareStatement("INSERT INTO `history`(`id`, `url`, `date`, `user`) VALUES (null,?,?,?)");
-        Query.setString(1,o.getUrl());
-        Query.setString(2,o.getDate());
-        Query.setInt(3,o.getUserID());
-        ResultSet QueryResult = Query.executeQuery();
-        History added = null;
-        while (QueryResult.next()){
-            added = new History();
-            added.setUrl(QueryResult.getString("url"));
-            added.setDate(QueryResult.getString("date"));
-            added.setUserID(QueryResult.getInt("user"));
+    public History insert(History o){
+        try {
+            Connection con = SingletoConnexionDb.getConnection();
+            PreparedStatement Query = con.prepareStatement("INSERT INTO `history`(`id`, `url`, `date`, `user`) VALUES (null,?,?,?)");
+            Query.setString(1,o.getUrl());
+            Query.setString(2,o.getDate());
+            Query.setInt(3,o.getUserID());
+            int QueryResult = Query.executeUpdate();
+            return (QueryResult!=0)?o:null;
         }
-        return added;
+        catch (SQLException e){
+            e.getStackTrace();
+        }
+        return null;
     }
 
     @Override

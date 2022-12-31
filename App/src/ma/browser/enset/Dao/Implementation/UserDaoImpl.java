@@ -11,21 +11,25 @@ import java.sql.SQLException;
 
 public class UserDaoImpl implements UserDao {
     @Override
-    public User findOne(User user) throws SQLException {
-        Connection con = SingletoConnexionDb.getConnection();
-        PreparedStatement query = con.prepareStatement("SELECT * FROM USERS WHERE Email = ? AND Password = ?");
-        query.setString(1,user.getEmail());
-        query.setString(2,user.getPassword());
-        ResultSet QueryResult = query.executeQuery();
-        User fUser = null;
-        while (QueryResult.next()){
-            fUser = new User();
-            fUser.setId(QueryResult.getInt("id"));
-            fUser.setFullName(QueryResult.getString("Full_Name"));
-            fUser.setEmail(QueryResult.getString("Email"));
-            fUser.setPassword(QueryResult.getString("Password"));
-        }
-        return fUser;
+    public User findOne(User user){
+       try {
+           Connection con = SingletoConnexionDb.getConnection();
+           PreparedStatement query = con.prepareStatement("SELECT * FROM USERS WHERE Email = ? AND Password = ?");
+           query.setString(1,user.getEmail());
+           query.setString(2,user.getPassword());
+           ResultSet QueryResult = query.executeQuery();
+           User fUser = new User();
+           while (QueryResult.next()){
+               fUser.setId(QueryResult.getInt("id"));
+               fUser.setFullName(QueryResult.getString("Full_Name"));
+               fUser.setEmail(QueryResult.getString("Email"));
+               fUser.setPassword(QueryResult.getString("Password"));
+           }
+           return fUser;
+       }catch (SQLException e){
+           e.getStackTrace();
+       }
+       return null;
     }
     @Override
     public User insert(User user) {
