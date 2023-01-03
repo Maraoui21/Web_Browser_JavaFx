@@ -59,4 +59,12 @@
     -fx-padding: 10px;
     -fx-font-family: "Berlin Sans FB Demi";
     -fx-spacing: 20px;
+    -fx-pref-height: 40px;
+}
+
+.DownloadBtn {
+    -fx-background-color: rgba(0, 16, 100, 0.79);
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-family: "Berlin Sans FB Demi";
 }

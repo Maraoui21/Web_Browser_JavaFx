@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.web.WebView?>
+<Tab xmlns="http://javafx.com/javafx"
+     xmlns:fx="http://javafx.com/fxml"
+     fx:controller="ma.browser.enset.Presentation.Controllers.PdfView"
+            >
+    <WebView fx:id="PdfViewr" layoutX="-1.0" layoutY="52.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="862.0" />
+</Tab>

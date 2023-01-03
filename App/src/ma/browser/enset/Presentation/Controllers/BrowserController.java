@@ -1,4 +1,8 @@
 package ma.browser.enset.Presentation.Controllers;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Task;
 import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -6,11 +10,14 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.web.WebView;
+import javafx.stage.Stage;
 import ma.browser.enset.Dao.Entities.History;
 import ma.browser.enset.Dao.Implementation.HistoryDaoImpl;
 import ma.browser.enset.Services.Implimentation.HistoryServiceImpl;
@@ -18,13 +25,18 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.logging.Handler;
 
 public class BrowserController implements Initializable {
     public Tab firstTab;
@@ -39,6 +51,7 @@ public class BrowserController implements Initializable {
     private Tab addNewTab;
     @FXML
     public WebView webViewF;
+    public static TabPane GeneraleTabPan;
     @FXML
     public TabPane tabPan;
     public static Boolean isLogged(){
@@ -87,13 +100,14 @@ public class BrowserController implements Initializable {
     void refresh(ActionEvent refresh){
         webViewF.getEngine().executeScript("window.location.reload()");
     }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
         if(isLogged()){
             ToolsBox.getChildren().remove(LoginBtn);
         }
+        // loading default url
         webViewF.getEngine().load("http://google.com");
+        // handle enter click inside url textField
         tfTitle.setOnKeyPressed((new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
@@ -102,6 +116,7 @@ public class BrowserController implements Initializable {
                 }
             }
         }));
+        // adding new tab
         addNewTab.setOnSelectionChanged(new EventHandler<Event>(){
             @Override
             public void handle(Event event){
@@ -120,6 +135,7 @@ public class BrowserController implements Initializable {
                 }
             }
         });
+        // handle webView changes like clicked url inside webView and put it in the textField
         webViewF.getEngine().getLoadWorker().stateProperty().addListener((observable,oldVal,newVal)->{
             if(Worker.State.SUCCEEDED.equals(newVal)){
                 Document doc = webViewF.getEngine().getDocument();
@@ -147,11 +163,33 @@ public class BrowserController implements Initializable {
                 Loading.setProgress(0.0);
             }
             else {
-                double x = Loading.getProgress();
-                Loading.setProgress(x+=0.3);
+                    double x = Loading.getProgress();
+                    Loading.setProgress(x+=0.3);
+            }
+        });
+        // handle download links
+        webViewF.getEngine().locationProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String oldLink, String newLink) {
+                if(newLink.endsWith(".pdf")){
+                    try {
+                        File file = new File("App/src/ma/browser/enset/Presentation/view/Download.fxml");
+                        AnchorPane DownLoadUi = FXMLLoader.load(file.toURL());
+                        Stage stage = new Stage();
+                        Scene DownloadScene = new Scene(DownLoadUi);
+//                        DownloadScene.getStylesheets().add(getClass().getResource("../Style/DownloadUi.css").toExternalForm());
+                        stage.setScene(DownloadScene);
+                        stage.setTitle("Download");
+                        Download.Link = new URL(newLink);
+                        stage.show();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
             }
         });
     }
+
 
     public void LoginHandler(ActionEvent actionEvent) {
         try {
@@ -163,6 +201,31 @@ public class BrowserController implements Initializable {
             tabPan.getSelectionModel().select(tabPan.getTabs().size() - 2);
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public void openDownload(ActionEvent actionEvent) {
+        DefaultTab.openDonwloadFolder();
+    }
+    public void OpenHistory(ActionEvent actionEvent) {
+        if(isLogged()){
+            GeneraleTabPan = this.tabPan;
+            try {
+                File file = new File("App/src/ma/browser/enset/Presentation/view/History.fxml");
+                AnchorPane HisoryUi = FXMLLoader.load(file.toURL());
+                Stage stage = new Stage();
+                Scene Historyscene = new Scene(HisoryUi);
+                stage.setScene(Historyscene);
+                stage.setTitle("Download");
+                stage.show();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }else{
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Please Login first !");
+            alert.setContentText("l'authentification est obligé pour acceder a l'historique");
+            alert.show();
         }
     }
 }

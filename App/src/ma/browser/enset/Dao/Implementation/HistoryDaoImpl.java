@@ -23,6 +23,7 @@ public class HistoryDaoImpl implements HistoryDao {
             ArrayList<History> HistoryList = new ArrayList<>();
             while (QueryResult.next()){
                 History toAdd = new History();
+                toAdd.setId(QueryResult.getInt("id"));
                 toAdd.setUrl(QueryResult.getString("url"));
                 toAdd.setDate(QueryResult.getString("date"));
                 toAdd.setUserID(QueryResult.getInt("user"));

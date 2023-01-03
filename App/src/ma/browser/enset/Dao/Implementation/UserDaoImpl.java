@@ -45,4 +45,25 @@ public class UserDaoImpl implements UserDao {
     public User update(User user) {
         return null;
     }
+
+    @Override
+    public User findById(int Id) {
+        try {
+            Connection con = SingletoConnexionDb.getConnection();
+            PreparedStatement query = con.prepareStatement("SELECT * FROM USERS WHERE id= ?");
+            query.setInt(1,Id);
+            ResultSet QueryResult = query.executeQuery();
+            User fUser = new User();
+            while (QueryResult.next()){
+                fUser.setId(QueryResult.getInt("id"));
+                fUser.setFullName(QueryResult.getString("Full_Name"));
+                fUser.setEmail(QueryResult.getString("Email"));
+                fUser.setPassword(QueryResult.getString("Password"));
+            }
+            return fUser;
+        }catch (SQLException e){
+            e.getStackTrace();
+        }
+        return null;
+    }
 }

@@ -13,7 +13,6 @@ import ma.browser.enset.Dao.Entities.User;
 import ma.browser.enset.Dao.Implementation.HistoryDaoImpl;
 import ma.browser.enset.Dao.SingletoConnexionDb;
 import ma.browser.enset.Presentation.Controllers.BrowserController;
-
 import java.sql.Connection;
 import java.util.ArrayList;
 

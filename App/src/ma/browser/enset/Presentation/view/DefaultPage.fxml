@@ -38,11 +38,11 @@
                         </Button>
                 </HBox>
                 <HBox fx:id="ToolsBox2" alignment="CENTER" spacing="8" styleClass="TollButtons">
-                    <Button styleClass="btn">
+                    <Button onAction="#OpenHistory1" styleClass="btn">
                         <graphic>
                             <FontAwesomeIconView styleClass="iconsView" glyphName="HISTORY" />
                         </graphic></Button>
-                    <Button styleClass="btn">
+                    <Button onAction="#openDonwloadFolder" styleClass="btn">
                         <graphic>
                             <FontAwesomeIconView styleClass="iconsView" glyphName="DOWNLOAD" />
                         </graphic></Button>

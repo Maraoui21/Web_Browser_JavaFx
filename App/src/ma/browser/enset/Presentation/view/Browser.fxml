@@ -46,11 +46,11 @@
                             </HBox>
                             <HBox fx:id="ToolsBox" alignment="CENTER" spacing="8  " styleClass="TollButtons">
                                 <children>
-                                    <Button styleClass="btn">
+                                    <Button onAction="#OpenHistory" styleClass="btn">
                                         <graphic>
                                             <FontAwesomeIconView glyphName="HISTORY" styleClass="iconsView" />
                                         </graphic></Button>
-                                    <Button styleClass="btn">
+                                    <Button onAction="#openDownload" styleClass="btn">
                                         <graphic>
                                             <FontAwesomeIconView glyphName="DOWNLOAD" styleClass="iconsView" />
                                         </graphic></Button>

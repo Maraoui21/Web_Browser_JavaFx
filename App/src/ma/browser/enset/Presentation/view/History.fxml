@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<AnchorPane prefHeight="346.0" prefWidth="660.0" style="-fx-background-color: rgba(0, 16, 100, 0.79);" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ma.browser.enset.Presentation.Controllers.HistoryController">
+   <children>
+      <TableView fx:id="TabHistory" layoutY="50.0" prefHeight="296.0" prefWidth="669.0">
+        <columns>
+          <TableColumn fx:id="Idcol" prefWidth="82.40002596378326" text="ID" />
+          <TableColumn fx:id="urlcol" prefWidth="428.7999496459961" text="url" />
+            <TableColumn fx:id="datecol"  prefWidth="158.39993286132812" text="Date" />
+        </columns>
+      </TableView>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="289.0" layoutY="10.0" prefHeight="24.0" prefWidth="90.0" text="History" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="20.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

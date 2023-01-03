@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class History{
+    private int id;
     private String url;
     private String Date;
     private int userID;
@@ -17,6 +18,14 @@ public class History{
     // SETTERS AND GETTERS
     public String getUrl() {
         return url;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setUrl(String url) {

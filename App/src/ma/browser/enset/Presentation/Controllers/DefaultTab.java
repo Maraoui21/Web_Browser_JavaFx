@@ -1,5 +1,7 @@
 package ma.browser.enset.Presentation.Controllers;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -7,9 +9,13 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebView;
@@ -19,6 +25,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -79,6 +86,25 @@ public class DefaultTab implements Initializable {
                 }
             }
         }));
+        webViewF1.getEngine().locationProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String oldLink, String newLink) {
+                if(newLink.endsWith(".pdf")){
+                    try {
+                        File file = new File("App/src/ma/browser/enset/Presentation/view/Download.fxml");
+                        AnchorPane DownLoadUi = FXMLLoader.load(file.toURL());
+                        Stage stage = new Stage();
+                        Scene DownloadScene = new Scene(DownLoadUi);
+                        stage.setScene(DownloadScene);
+                        stage.setTitle("Download");
+                        Download.Link = new URL(newLink);
+                        stage.show();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        });
         updateUrl();
     }
 
@@ -124,6 +150,41 @@ public class DefaultTab implements Initializable {
             tabPan.getSelectionModel().select(tabPan.getTabs().size() - 2);
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public static void  openDonwloadFolder() {
+        Desktop desktop = Desktop.getDesktop();
+        try {
+            String home = System.getProperty("user.home");
+            desktop.open(new File(home+"\\Downloads\\Fx_Download"));
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    public void openDonwloadFolder(ActionEvent actionEvent) {
+        openDonwloadFolder();
+    }
+    public void OpenHistory1(ActionEvent actionEvent) {
+        BrowserController.GeneraleTabPan = currentTab.getTabPane();
+        if(Login.LoggedUser!=null){
+            try {
+                File file = new File("App/src/ma/browser/enset/Presentation/view/History.fxml");
+                AnchorPane HisoryUi = FXMLLoader.load(file.toURL());
+                Stage stage = new Stage();
+                Scene Historyscene = new Scene(HisoryUi);
+                stage.setScene(Historyscene);
+                stage.setTitle("Download");
+                stage.show();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }else{
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Please Login first !");
+            alert.setContentText("l'authentification est obligé pour acceder a l'historique");
+            alert.show();
         }
     }
 }
