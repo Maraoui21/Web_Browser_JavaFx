@@ -17,17 +17,6 @@ public class DownloadHistory {
         this.id = id;
     }
 
-    @Override
-    public String toString() {
-        return "DownloadHistory{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", url='" + url + '\'' +
-                ", date_Download='" + date_Download + '\'' +
-                ", user=" + user +
-                '}';
-    }
-
     public String getName() {
         return name;
     }

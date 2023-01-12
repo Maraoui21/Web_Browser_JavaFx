@@ -7,8 +7,8 @@ public class SingletoConnexionDb {
     private static Connection con = null;
     static {
         String url = "jdbc:mysql:// localhost:3306/browser";
-        String user = "mara8";
-        String pass = "mara8";
+        String user = "root";
+        String pass = "";
         try {
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection(url, user, pass);

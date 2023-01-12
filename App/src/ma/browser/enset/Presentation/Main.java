@@ -24,12 +24,12 @@ public class Main extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         TabPane root = FXMLLoader.load(getClass().getResource("view/Browser.fxml"));
+        SingletoConnexionDb.getConnection();
         primaryStage.setTitle("JAVA Project");
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("Style/Browser.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.setMaximized(true);
         primaryStage.show();
-
     }
 }
